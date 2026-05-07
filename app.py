@@ -1,4 +1,3 @@
-#old code
 import streamlit as st
 import requests
 import os
@@ -11,9 +10,6 @@ import cv2
 from collections import Counter
 from ultralytics import YOLO
 
-# ─────────────────────────────────────────────
-#  PAGE CONFIG
-# ─────────────────────────────────────────────
 st.set_page_config(
     page_title="GearVision AI",
     page_icon="⚙️",
@@ -21,14 +17,10 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─────────────────────────────────────────────
-#  CUSTOM CSS  — Industrial Dark Theme
-# ─────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
 
-/* ── Base ─────────────────────────────────── */
 :root {
     --bg:        #0a0c0f;
     --surface:   #111418;
@@ -55,11 +47,9 @@ html, body, [data-testid="stAppViewContainer"] {
     border-right: 1px solid var(--border);
 }
 
-/* hide default streamlit chrome */
 #MainMenu, footer, header { visibility: hidden; }
 [data-testid="stToolbar"] { display: none; }
 
-/* ── Typography ───────────────────────────── */
 .title-hero {
     font-family: 'Orbitron', monospace;
     font-weight: 900;
@@ -88,7 +78,6 @@ html, body, [data-testid="stAppViewContainer"] {
     text-transform: uppercase;
 }
 
-/* ── Cards ────────────────────────────────── */
 .card {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -110,14 +99,6 @@ html, body, [data-testid="stAppViewContainer"] {
 .card-danger::before  { background: linear-gradient(90deg, var(--danger), transparent); }
 .card-warning::before { background: linear-gradient(90deg, var(--warning), transparent); }
 .card-ok::before      { background: linear-gradient(90deg, var(--ok), transparent); }
-
-/* ── Metric blocks ────────────────────────── */
-.metric-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-    margin: 1rem 0;
-}
 
 .metric-box {
     background: var(--surface);
@@ -143,7 +124,6 @@ html, body, [data-testid="stAppViewContainer"] {
     margin-top: 0.25rem;
 }
 
-/* ── Detection badges ─────────────────────── */
 .badge {
     display: inline-block;
     font-family: 'DM Mono', monospace;
@@ -158,7 +138,6 @@ html, body, [data-testid="stAppViewContainer"] {
 .badge-lack    { background: rgba(48,209,88,0.15);  border: 1px solid var(--ok);     color: #5effa0; }
 .badge-scratch { background: rgba(0,229,255,0.15);  border: 1px solid var(--accent); color: var(--accent); }
 
-/* ── Severity bar ─────────────────────────── */
 .severity-label {
     font-family: 'Orbitron', monospace;
     font-size: 1.1rem;
@@ -171,7 +150,6 @@ html, body, [data-testid="stAppViewContainer"] {
 .severity-low     { color: var(--ok);      }
 .severity-normal  { color: var(--accent3); }
 
-/* ── Progress / confidence bars ───────────── */
 .conf-bar-wrap {
     background: var(--surface);
     border-radius: 4px;
@@ -185,7 +163,6 @@ html, body, [data-testid="stAppViewContainer"] {
     background: linear-gradient(90deg, var(--accent), #0080ff);
 }
 
-/* ── Upload zone ──────────────────────────── */
 [data-testid="stFileUploader"] {
     border: 2px dashed var(--border) !important;
     border-radius: 12px !important;
@@ -196,7 +173,6 @@ html, body, [data-testid="stAppViewContainer"] {
     border-color: var(--accent) !important;
 }
 
-/* ── Buttons ──────────────────────────────── */
 .stButton > button {
     background: linear-gradient(135deg, var(--accent), #0080ff) !important;
     color: #000 !important;
@@ -215,7 +191,6 @@ html, body, [data-testid="stAppViewContainer"] {
     box-shadow: 0 8px 24px rgba(0,229,255,0.35) !important;
 }
 
-/* ── Sidebar items ────────────────────────── */
 .sidebar-stat {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -232,7 +207,6 @@ html, body, [data-testid="stAppViewContainer"] {
     font-weight: 500;
 }
 
-/* ── Divider ──────────────────────────────── */
 .glow-divider {
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--accent), transparent);
@@ -240,7 +214,6 @@ html, body, [data-testid="stAppViewContainer"] {
     opacity: 0.4;
 }
 
-/* ── Scan animation overlay text ─────────── */
 .scanning-text {
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
@@ -251,7 +224,6 @@ html, body, [data-testid="stAppViewContainer"] {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* ── Streamlit overrides ──────────────────── */
 .stSlider [data-baseweb="slider"] { background: var(--border) !important; }
 .stSelectbox div[data-baseweb="select"] > div { background: var(--panel) !important; border-color: var(--border) !important; }
 .stRadio label { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--muted); }
@@ -392,7 +364,7 @@ with st.sidebar:
     st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
     st.markdown(
         '<p style="font-family:DM Mono,monospace;font-size:0.65rem;color:#4b5563;text-align:center;">'
-        'Model hosted on 🤗 HuggingFace<br>ritesht04/Gear_Detection</p>',
+        'Model hosted on 🤗 HuggingFace<br>Shubhamv12/Gear_Detection</p>',
         unsafe_allow_html=True,
     )
 
@@ -471,7 +443,6 @@ with col_info:
 if uploaded is not None:
     st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
 
-    # Save to temp file
     suffix = Path(uploaded.name).suffix
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         tmp.write(uploaded.read())
@@ -481,7 +452,6 @@ if uploaded is not None:
     img_bgr = cv2.cvtColor(np.array(img_pil), cv2.COLOR_RGB2BGR)
     h, w    = img_bgr.shape[:2]
 
-    # ── Scanning animation
     scan_ph = st.empty()
     scan_ph.markdown(
         '<div style="text-align:center;padding:1rem;">'
@@ -490,7 +460,6 @@ if uploaded is not None:
     )
     time.sleep(0.4)
 
-    # ── Run inference
     t0     = time.time()
     result = run_inference(model, tmp_path, conf_thresh, iou_thresh, img_size, use_tta)
     elapsed = time.time() - t0
@@ -499,14 +468,10 @@ if uploaded is not None:
     drawn_rgb = cv2.cvtColor(drawn_bgr, cv2.COLOR_BGR2RGB)
     scan_ph.empty()
 
-    # ─────────────────────────────────────────
-    #  RESULTS LAYOUT
-    # ─────────────────────────────────────────
     total       = len(detections)
     sev_label, sev_cls, sev_icon = get_severity(total, detections)
     class_counts = Counter(d["class"] for d in detections)
 
-    # Top metrics row
     m1, m2, m3, m4 = st.columns(4)
     with m1:
         st.markdown(
@@ -536,7 +501,6 @@ if uploaded is not None:
 
     st.markdown('<div style="height:0.5rem;"></div>', unsafe_allow_html=True)
 
-    # Image comparison columns
     img_col, res_col = st.columns(2, gap="large")
 
     with img_col:
@@ -560,7 +524,6 @@ if uploaded is not None:
 
     st.markdown('<div style="height:0.5rem;"></div>', unsafe_allow_html=True)
 
-    # Severity + breakdown
     detail_col, sev_col = st.columns([3, 2], gap="large")
 
     with detail_col:
@@ -625,7 +588,6 @@ if uploaded is not None:
             unsafe_allow_html=True,
         )
 
-        # All detection list
         if detections:
             st.markdown('<div class="card">', unsafe_allow_html=True)
             st.markdown(
@@ -648,11 +610,9 @@ if uploaded is not None:
                 )
             st.markdown("</div>", unsafe_allow_html=True)
 
-    # Clean up temp file
     os.unlink(tmp_path)
 
 else:
-    # Empty state
     st.markdown(
         '<div class="card" style="text-align:center;padding:3rem;">'
         '<p style="font-family:Orbitron,monospace;font-size:3rem;margin:0;">⚙️</p>'
@@ -668,6 +628,7 @@ else:
 st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
 st.markdown(
     '<p style="font-family:DM Mono,monospace;font-size:0.65rem;color:#374151;text-align:center;">'
-    'GearVision AI · YOLOv8m-OBB · mAP50 99.4% · Built with Streamlit</p>',
+    'GearVision AI · YOLOv8m-OBB · mAP50 99.4% · Built with Streamlit<br>'
+    'Developed by <span style="color:#00e5ff;font-weight:500;">Shubham Verma</span></p>',
     unsafe_allow_html=True,
 )
