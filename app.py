@@ -263,7 +263,7 @@ h1, h2, h3 { font-family: 'Orbitron', monospace !important; color: var(--text) !
 # ─────────────────────────────────────────────
 #  CONSTANTS
 # ─────────────────────────────────────────────
-MODEL_URL  = "https://huggingface.co/ritesht04/Gear_Detection/resolve/main/best%20(3).pt"
+MODEL_URL  = "https://huggingface.co/Shubhamv12/Gear_Detection/resolve/main/best.pt"
 MODEL_PATH = Path("best.pt")
 
 CLASS_NAMES  = {0: "break", 1: "lack", 2: "scratch"}
