@@ -735,23 +735,21 @@ st.markdown('<div class="sep-line" style="margin-top:2rem;"></div>', unsafe_allo
 st.markdown("""
 <div class="footer-outer">
   <div class="footer-label">◆ &nbsp; Developed By &nbsp; ◆</div>
-  <div class="dev-row">
+ <div class="dev-card">
+  <div class="dev-avatar av-gold">SV</div>
+  <div>
+    <div class="dev-name">Shubham Verma</div>
+    <div class="dev-role">MECHANICAL ENGINEER</div>
+  </div>
+</div>
 
-    <div class="dev-card">
-      <div class="dev-avatar av-gold">SV</div>
-      <div>
-        <div class="dev-name">Shubham Verma</div>
-        <div class="dev-role">MECHANICAL ENGINEER</div>
-      </div>
-    </div>
-
-    <div class="dev-card">
-      <div class="dev-avatar av-steel">SP</div>
-      <div>
-        <div class="dev-name">Shubham Pal</div>
-        <div class="dev-role">MECHANICAL ENGINEER</div>
-      </div>
-    </div>
+<div class="dev-card">
+  <div class="dev-avatar av-steel">SP</div>
+  <div>
+    <div class="dev-name">Shubham Pal</div>
+    <div class="dev-role">MECHANICAL ENGINEER</div>
+  </div>
+</div>
 
   </div>
   <div class="footer-copy">
